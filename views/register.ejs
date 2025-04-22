@@ -1,118 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+}
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('images/neonblack_back1.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+.wrapper{
+    width: 420px;
+    background-color: transparent;
+    border: 2px solid rgba(225, 225, 225, .2);
+    backdrop-filter: blur(15px);
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 30px 20px;
+}
 
+.wrapper h1{    
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input_box{
+    position:relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input_box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(225, 225, 225, .2);
+    border-radius: 40px;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+}
+
+.input_box input::placeholder{
+    color: rgb(255, 255, 255);
+}
+
+.input_box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper .remember_forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.remember_forgot a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.remember_forgot a:hover{
+    text-decoration: underline;
+}
+
+.wrapper .button {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.wrapper .button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);   
+}
+
+.wrapper .register_link{
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 15px;    
+}
+
+.register_link p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register_link p a:hover{
+    text-decoration: underline;
+}
+
+/* Home button styles */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);
+}
+
+.home-btn i {
+    font-size: 20px;
+}
+    </style>
 </head>
 <body>
+    <a href="home.html" class="home-btn"><i class='bx bx-home'></i> Home</a>
+    <div class="wrapper">
+        <form action="home.html" method="GET">
+            <h1>Sign Up</h1>
+            <div class="input_box">
+                <input type="text" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
 
-<header class="header">
-   
-   <section class="flex">
+            <div class="input_box">
+                <input type="email" placeholder="Email" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
 
-      <a href="home.html" class="logo">Educa.</a>
+            <div class="input_box">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bx-lock'></i>
+            </div>
 
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
+            <div class="input_box">
+                <input type="password" placeholder="Confirm Password" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
 
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
+            <div class="remember_forgot">
+                <label>
+                    <input type="checkbox" name="" id="">
+                    I agree to the terms & conditions
+                </label>
+            </div>
 
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="profile.html" class="btn">view profile</a>
-         <div class="flex-btn">
-            <a href="login.html" class="option-btn">login</a>
-            <a href="register.html" class="option-btn">register</a>
-         </div>
-      </div>
+            <button type="submit" class="button">Sign Up</button>
 
-   </section>
-
-</header>   
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">shaikh anas</h3>
-      <p class="role">studen</p>
-      <a href="profile.html" class="btn">view profile</a>
-   </div>
-
-   <nav class="navbar">
-      <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
-   </nav>
-
-</div>
-
-<section class="form-container">
-
-   <form action="" method="post" enctype="multipart/form-data">
-      <h3>register now</h3>
-      <p>your name <span>*</span></p>
-      <input type="text" name="name" placeholder="enter your name" required maxlength="50" class="box">
-      <p>your email <span>*</span></p>
-      <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
-      <p>your password <span>*</span></p>
-      <input type="password" name="pass" placeholder="enter your password" required maxlength="20" class="box">
-      <p>confirm password <span>*</span></p>
-      <input type="password" name="c_pass" placeholder="confirm your password" required maxlength="20" class="box">
-      <p>select profile <span>*</span></p>
-      <input type="file" accept="image/*" required class="box">
-      <input type="submit" value="register new" name="submit" class="btn">
-   </form>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-   
+            <div class="register_link">
+                <p>Already have an account?
+                    <a href="login.html">Login</a>
+                </p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
