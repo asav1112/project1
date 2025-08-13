@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('images/neonblack_back1.jpg') no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrapper{
+            width: 420px;
+            background-color: transparent;
+            border: 2px solid rgba(225, 225, 225, .2);
+            backdrop-filter: blur(15px);
+            color: rgb(255, 255, 255);
+            border-radius: 15px;
+            padding: 30px 20px;
+        }
+
+        .wrapper h1{    
+            font-size: 36px;
+            text-align: center;
+        }
+
+        .wrapper .input_box{
+            position:relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+        }
+
+        .input_box input{
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(225, 225, 225, .2);
+            border-radius: 40px;
+            color: #fff;
+            font-size: 16px;
+            padding: 20px 45px 20px 20px;
+        }
+
+        .input_box input::placeholder{
+            color: rgb(255, 255, 255);
+        }
+
+        .input_box i{
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .wrapper .remember_forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14.5px;
+            margin: -15px 0 15px;
+        }
+
+        .remember_forgot a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .remember_forgot a:hover{
+            text-decoration: underline;
+        }
+
+        .wrapper .button {
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .button:hover{
+            transform: translateY(-2px);
+            box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);   
+        }
+
+        .wrapper .register_link{
+            font-size: 14.5px;
+            text-align: center;
+            margin-top: 15px;    
+        }
+
+        .register_link p a{
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register_link p a:hover{
+            text-decoration: underline;
+        }
+
+        /* Home button styles */
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);
+        }
+
+        .home-btn i {
+            font-size: 20px;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            color: #4caf50;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn"><i class='bx bx-home'></i> Home</a>
+    <div class="wrapper">
+        <form id="registerForm">
+            <h1>Sign Up</h1>
+            <div class="input_box">
+                <input type="text" name="name" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+
+            <div class="input_box">
+                <input type="email" name="email" placeholder="Email" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class='bx bx-lock'></i>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
+
+            <div class="remember_forgot">
+                <label>
+                    <input type="checkbox" name="terms" required>
+                    I agree to the terms & conditions
+                </label>
+            </div>
+
+            <button type="submit" class="button">Sign Up</button>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <div class="register_link">
+                <p>Already have an account?
+                    <a href="/login">Login</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <div class="side-bar">
+        <div id="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <div class="profile">
+            <img src="<%= user && user.name === 'Sakhee Mate' ? 'images/sakhee.jpg' : 
+                        user && user.name === 'Asav Mahyavanshi' ? 'images/asav2.jpg' : 
+                        user && user.name === 'Aman Dudi' ? 'images/dudi.jpg' : 
+                        'images/pic-1.jpg' %>" class="image" alt="">
+            <h3 class="name"><%= user ? user.name : 'Guest' %></h3>
+            <p class="role"><%= user ? user.role : 'Guest' %></p>
+            <a href="/profile" class="btn">view profile</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+
+            if (password !== confirmPassword) {
+                document.getElementById('errorMessage').textContent = 'Passwords do not match';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                return;
+            }
+
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                password: password,
+                terms: formData.get('terms') === 'on'
+            };
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('successMessage').textContent = 'Registration successful! Redirecting to login...';
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    
+                    // Redirect to login page after successful registration
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1500);
+                } else {
+                    document.getElementById('errorMessage').textContent = result.message || 'Registration failed';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again.';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

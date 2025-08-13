@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>tutor profile</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="/" class="logo"><img src="images/logo2.png" class="image" alt="StudyBridge"></a>
+      <form action="/search" method="get" class="search-form">
+         <input type="text" name="search" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user ? user.name : 'student1' %></h3>
+         <p class="role"><%= user ? user.role : 'Student' %></p>
+         <% if (user) { %>
+            <a href="/profile" class="btn">view profile</a>
+            <a href="/api/logout" class="option-btn" id="logout-btn">logout</a>
+         <% } else { %>
+            <a href="/login" class="option-btn">login</a>
+            <a href="/register" class="option-btn">register</a>
+         <% } %>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user ? user.name : 'visitor' %></h3>
+      <p class="role"><%= user ? user.role : 'Student' %></p>
+      <% if (user) { %>
+         <a href="/profile" class="btn">view profile</a>
+      <% } %>
+   </div>
+   <nav class="navbar">
+      <a href="/"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Admin</span></a>
+      <a href="/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+</div>
+
+<section class="teacher-profile">
+   <h1 class="heading">profile details</h1>
+   <div class="details">
+      <div class="tutor">
+         <img src="images/pic-8.jpg" alt="">
+         <h3>DSA Expert</h3>
+         <span>Algorithm Specialist</span>
+      </div>
+      <div class="flex">
+         <p>total playlists : <span>1</span></p>
+         <p>total videos : <span>10</span></p>
+         <p>total likes : <span>950</span></p>
+         <p>total comments : <span>42</span></p>
+      </div>
+   </div>
+</section>
+
+<section class="courses">
+   <h1 class="heading">our courses</h1>
+   <div class="box-container">
+      <div class="box">
+         <div class="thumb">
+            <img src="images/thumb-7.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete DSA tutorial</h3>
+         <a href="/playlist7" class="inline-btn">view playlist</a>
+      </div>
+   </div>
+</section>
+
+<section class="footer">
+   <div class="footer-content">
+     <div class="footer-col">
+       <h3>Quick Links</h3>
+       <ul>
+         <li><a href="/">Home</a></li>
+         <li><a href="/about">About Us</a></li>
+         <li><a href="/courses">Courses</a></li>
+         <li><a href="/teachers">Admins(Teachers)</a></li>
+         <li><a href="/contact">Contact Us</a></li>
+       </ul>
+     </div>
+     
+     <div class="footer-col">
+       <h3>Connect With Us</h3>
+       <div class="social-icons">
+         <a href="#"><i class="fab fa-instagram"></i></a>
+         <a href="#"><i class="fab fa-linkedin"></i></a>
+         <a href="#"><i class="fab fa-twitter"></i></a>
+         <a href="#"><i class="fab fa-youtube"></i></a>
+       </div>
+     </div>
+     <div class="footer-col">
+       <h3>Contact</h3>
+       <p>Email: ui23cs38@iiitsurat.ac.in</p>
+       <p>Phone: +91 9638674102</p>
+     </div>
+     
+     <div class="footer-col">
+        <h3>Courses Quick Links</h3>
+        <ul>
+           <li><a href="/courses?topic=html">HTML</a></li>
+           <li><a href="/courses?topic=css">CSS</a></li>
+           <li><a href="/courses?topic=javascript">JavaScript</a></li>
+           <li><a href="/courses?topic=dsa">DSA</a></li>
+           <li><a href="/courses?topic=software">Software Engineering</a></li>
+         </ul>
+      </div>
+   </div>
+   <div class="footer-bottom">
+     <p>&copy; 2025 StudyPath. All rights reserved.</p>
+   </div>
+</section>
+
+<script src="js/script.js"></script>
+<script>
+   document.getElementById('logout-btn')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      fetch('/api/logout', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      })
+      .then(response => response.json())
+      .then(data => {
+         if (data.success) {
+            window.location.href = '/';
+         }
+      });
+   });
+</script>
+</body>
+</html> 

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {         
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('images/neonblack_back1.jpg') no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Home button */
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);
+        }
+
+        .wrapper {
+            width: 420px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #fff;
+            border-radius: 15px;
+            padding: 30px 40px;
+        }
+
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+        }
+
+        .wrapper .input_box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+        }
+
+        .input_box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            color: #fff;
+            font-size: 16px;
+            padding: 20px 45px 20px 20px;
+        }
+
+        .input_box input::placeholder {
+            color: #fff;
+        }
+
+        .input_box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .wrapper .remember_forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14.5px;
+            margin: -15px 0 15px;
+        }
+
+        .remember_forgot label input {
+            accent-color: #fff;
+            margin-right: 3px;
+        }
+
+        .remember_forgot a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .remember_forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .wrapper .button {
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .button:hover{
+            transform: translateY(-2px);
+            box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.400);   
+        }
+
+        .wrapper .register_link {
+            font-size: 14.5px;
+            text-align: center;
+            margin: 20px 0 15px;
+        }
+
+        .register_link p a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register_link p a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            color: #4caf50;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .guest-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .guest-login p {
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .guest-login .button {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .guest-login .button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .side-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .side-bar.open {
+            transform: translateX(0);
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .profile {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile h3 {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .profile p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .profile .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #fff;
+            color: #333;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile .btn:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn"><i class='bx bx-home'></i> Home</a>
+    <div class="wrapper">
+        <form id="loginForm" action="/api/login" method="post">
+            <h1>Login</h1>
+            <div class="input_box">
+                <input type="email" name="email" placeholder="Email" required>
+                <i class='bx bxs-user'></i>
+            </div>
+
+            <div class="input_box">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class='bx bx-lock'></i>
+            </div>
+
+            <div class="remember_forgot">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Remember Me
+                </label>  
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="button">Login</button>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <div class="register_link">
+                <p>Don't have an account?
+                    <a href="/register">Signup</a>
+                </p>
+            </div>
+
+            <div class="guest-login">
+                <p>or</p>
+                <form action="/api/guest-login" method="post">
+                    <button type="submit" class="button">Continue as Guest</button>
+                </form>
+            </div>
+        </form>
+    </div>
+
+    <div class="side-bar">
+        <div id="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <div class="profile">
+            <img src="<%= user && user.name === 'Sakhee Mate' ? 'images/sakhee.jpg' : 
+                        user && user.name === 'Asav Mahyavanshi' ? 'images/asav2.jpg' : 
+                        user && user.name === 'Aman Dudi' ? 'images/dudi.jpg' : 
+                        'images/pic-1.jpg' %>" class="image" alt="">
+            <h3 class="name"><%= user ? user.name : 'Guest' %></h3>
+            <p class="role"><%= user ? user.role : 'Guest' %></p>
+            <a href="/profile" class="btn">view profile</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                email: formData.get('email'),
+                password: formData.get('password'),
+                remember: formData.get('remember') === 'on'
+            };
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('successMessage').textContent = 'Login successful! Redirecting...';
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    
+                    // Redirect to home page after successful login
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1500);
+                } else {
+                    const result = await response.text();
+                    document.getElementById('errorMessage').textContent = result || 'Login failed';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again.';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        });
+
+        // Add password visibility toggle
+        const passwordInput = document.querySelector('input[type="password"]');
+        const passwordIcon = document.querySelector('.input_box i.bx-lock');
+        
+        passwordIcon.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('bx-lock');
+                passwordIcon.classList.add('bx-lock-open');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('bx-lock-open');
+                passwordIcon.classList.add('bx-lock');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>about us</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="/" class="logo" ><img src="images\logo2.png" class="image" alt="StudyBridge"></a>
+
+      <form action="/search" method="get" class="search-form">
+         <input type="text" name="search" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user ? user.name : 'Guest' %></h3>
+         <p class="role"><%= user ? 'Student' : 'Guest' %></p>
+         <a href="/profile" class="btn">view profile</a>
+         <div class="flex-btn">
+            <% if (user) { %>
+               <a href="#" id="logout-btn" class="option-btn">logout</a>
+            <% } else { %>
+               <a href="/login" class="option-btn">login</a>
+               <a href="/register" class="option-btn">register</a>
+            <% } %>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="<%= user && user.name === 'Sakhee Mate' ? 'images/sakhee.jpg' : 
+                  user && user.name === 'Asav Mahyavanshi' ? 'images/asav2.jpg' : 
+                  user && user.name === 'Aman Dudi' ? 'images/dudi.jpg' : 
+                  'images/pic-1.jpg' %>" class="image" alt="">
+      <h3 class="name"><%= user ? user.name : 'Guest' %></h3>
+      <p class="role"><%= user ? user.role : 'Guest' %></p>
+      <a href="/profile" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Admin</span></a>
+      <a href="/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+
+</div>
+
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="images/about-img.svg" alt="">
+      </div>
+
+      <div class="content">
+         <h3>why choose us?</h3>
+         <p>StudyBridge offers a focused, hands-on learning experience for engineering students. With structured roadmaps, real-world projects, quizzes, and video content, we simplify complex concepts and track your progress. Learn at your pace, anytime, anywhere. StudyBridge bridges the gap between theory and practice—making learning truly effective.</p>
+         <a href="/courses" class="inline-btn">our courses</a>
+      </div>
+
+   </div>
+
+   <div class="box-container">
+
+      <div class="box">
+         <i class="fas fa-graduation-cap"></i>
+         <div>
+            <h3><%= stats ? stats.courses : '+10k' %></h3>
+            <p>online courses</p>
+         </div>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-user-graduate"></i>
+         <div>
+            <h3><%= stats ? stats.students : '+40k' %></h3>
+            <p>brilliant students</p>
+         </div>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-chalkboard-user"></i>
+         <div>
+            <h3><%= stats ? stats.tutors : '+2k' %></h3>
+            <p>expert tutors</p>
+         </div>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-briefcase"></i>
+         <div>
+            <h3><%= stats ? stats.placement : '100%' %></h3>
+            <p>job placement</p>
+         </div>
+      </div>
+
+   </div>
+
+</section> 
+
+<section class="reviews">
+
+   <h1 class="heading">student's reviews</h1>
+
+   <div class="box-container">
+      <% if (reviews && reviews.length > 0) { %>
+         <% reviews.forEach(review => { %>
+            <div class="box">
+               <p><%= review.comment %></p>
+               <div class="student">
+                  <img src="<%= review.studentImage %>" alt="<%= review.studentName %>">
+                  <div>
+                     <h3><%= review.studentName %></h3>
+                     <div class="stars">
+                        <% for(let i = 0; i < Math.floor(review.rating); i++) { %>
+                           <i class="fas fa-star"></i>
+                        <% } %>
+                        <% if (review.rating % 1 !== 0) { %>
+                           <i class="fas fa-star-half-alt"></i>
+                        <% } %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         <% }); %>
+      <% } else { %>
+         <p class="empty">No reviews available at the moment.</p>
+      <% } %>
+   </div>
+
+</section>
+
+<script>
+   document.getElementById('logout-btn')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      fetch('/api/logout', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      })
+      .then(response => response.json())
+      .then(data => {
+         if (data.success) {
+            window.location.href = '/';
+         }
+      });
+   });
+
+   // Handle search form submission
+   document.querySelector('.search-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const searchQuery = this.querySelector('input[name="search"]').value;
+      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+   });
+</script>
+
+<!-- About Us Section -->
+<section id="about" class="about-section">
+   <h2>About Us</h2>
+   <div class="team">
+     <div class="team-member">
+       <img src="images\asav2.jpg" alt="John Doe">
+       <h3>Asav Mahyavanshi</h3>
+       <p class="work-title">FrontEnd developer</p>
+       <div class="social-links">
+           <a href="https://www.instagram.com/_.asav._1112/" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://www.linkedin.com/in/asav-mahyavanshi-564394348?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+           <a href="https://twitter.com/johndoe" target="_blank"><i class="fab fa-twitter"></i></a>
+       </div>
+   </div>
+   
+   <div class="team-member">
+       <img src="images\aman.jpg" alt="Aman Dudi">
+       <h3>Aman Dudi</h3>
+       <p class="work-title">UI/UX Designer</p>
+       <div class="social-links">
+           <a href="https://www.instagram.com/a_man__jaat/?locale=kk-KZ&hl=af" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://www.linkedin.com/in/janesmith" target="_blank"><i class="fab fa-linkedin"></i></a>
+           <a href="https://twitter.com/janesmith" target="_blank"><i class="fab fa-twitter"></i></a>
+       </div>
+   </div>
+   
+   <div class="team-member">
+       <img src="images\sakhee.jpg" alt="Sakhee Mate">
+       <h3>Sakhee Mate</h3>
+       <p class="work-title">BackEnd developer</p>
+       <div class="social-links">
+           <a href="https://www.instagram.com/sakhee_24/" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://www.linkedin.com/in/sakhee-mate-67008a2ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+           <a href="https://twitter.com/alicejohnson" target="_blank"><i class="fab fa-twitter"></i></a>
+       </div>
+   </div>    
+   </div>
+ </section>
+ 
+
+
+
+
+
+
+
+<!-- Footer Section -->
+<section class="footer">
+   <div class="footer-content">
+     <div class="footer-col">
+       <h3>Quick Links</h3>
+       <ul>
+         <li><a href="/">Home</a></li>
+         <li><a href="/about">About Us</a></li>
+         <li><a href="/courses">Courses</a></li>
+         <li><a href="/teachers">Admins(Teachers)</a></li>
+         <li><a href="/contact">Contact Us</a></li>
+       </ul>
+     </div>
+     
+     <div class="footer-col">
+       <h3>Connect With Us</h3>
+       <div class="social-icons">
+         <a href="#"><i class="fab fa-instagram"></i></a>
+         <a href="#"><i class="fab fa-linkedin"></i></a>
+         <a href="#"><i class="fab fa-twitter"></i></a>
+         <a href="#"><i class="fab fa-youtube"></i></a>
+       </div>
+     </div>
+     <div class="footer-col">
+       <h3>Contact</h3>
+       <p>Email: ui23cs38@iiitsurat.ac.in</p>
+       <p>Phone: +91 9638674102</p>
+     </div>
+     
+     <div class="footer-col">
+        <h3>Courses Quick Links</h3>
+        <ul>
+           <li><a href="/courses?topic=html">HTML</a></li>
+           <li><a href="/courses?topic=css">CSS</a></li>
+           <li><a href="/courses?topic=javascript">JavaScript</a></li>
+           <li><a href="/courses?topic=dsa">DSA</a></li>
+           <li><a href="/courses?topic=software">Software Engineering</a></li>
+         </ul>
+      </div>
+      
+   </div>
+   <div class="footer-bottom">
+     <p>&copy; 2025 StudyPath. All rights reserved.</p>
+   </div>
+</section>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+   
+</body>
+</html>

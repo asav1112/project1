@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root{
@@ -46,6 +45,7 @@ html::-webkit-scrollbar-thumb{
 body{
    background-color: var(--light-bg);
    padding-left: 30rem;
+   min-height: 100vh;
 }
 
 body.dark{
@@ -760,118 +760,116 @@ section{
    color: var(--main-color);
 }
 
-.watch-video .video-container{
-   background-color: var(--white);
-   border-radius: .5rem;
-   padding: 2rem;
+.watch-video .video-container {
+   background: #fff;
+   border-radius: 5px;
+   padding: 20px;
+   margin-bottom: 20px;
 }
 
-.watch-video .video-container .video{
+.watch-video .video-container .video {
    position: relative;
-   margin-bottom: 1.5rem;
+   padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+   height: 0;
+   overflow: hidden;
+   margin-bottom: 20px;
+   border-radius: 5px;
 }
 
-.watch-video .video-container .video video{
-   border-radius: .5rem;
+.watch-video .video-container .video iframe {
+   position: absolute;
+   top: 0;
+   left: 0;
    width: 100%;
-   object-fit: contain;
-   background-color: #000;
+   height: 100%;
+   border-radius: 5px;
 }
 
-.watch-video .video-container .title{
-   font-size: 2rem;
-   color: var(--black);
+.watch-video .video-container .title {
+   font-size: 20px;
+   color: #2c3e50;
+   margin-bottom: 15px;
 }
 
-.watch-video .video-container .info{
+.watch-video .video-container .info {
    display: flex;
-   margin-top: 1.5rem;
-   margin-bottom: 2rem;
-   border-bottom: var(--border);
-   padding-bottom: 1.5rem;
-   gap: 2.5rem;
-   align-items: center;
+   gap: 20px;
+   margin-bottom: 15px;
 }
 
-.watch-video .video-container .info p{
-   font-size: 1.6rem;
+.watch-video .video-container .info .date {
+   color: #666;
+   font-size: 14px;
 }
 
-.watch-video .video-container .info p span{
-   color: var(--light-color);
+.watch-video .video-container .info .date i {
+   margin-right: 5px;
+   color: #3498db;
 }
 
-.watch-video .video-container .info i{
-   margin-right: 1rem;
-   color: var(--main-color);
-}
-
-.watch-video .video-container .tutor{
+.watch-video .video-container .tutor {
    display: flex;
    align-items: center;
-   gap: 2rem;
-   margin-bottom: 1rem;
+   gap: 15px;
+   margin-bottom: 15px;
 }
 
-.watch-video .video-container .tutor img{
+.watch-video .video-container .tutor img {
+   width: 50px;
+   height: 50px;
    border-radius: 50%;
-   height: 5rem;
-   width: 5rem;
    object-fit: cover;
 }
 
-.watch-video .video-container .tutor h3{
-   font-size: 2rem;
-   color: var(--black);
-   margin-bottom: .2rem;
+.watch-video .video-container .tutor h3 {
+   font-size: 18px;
+   color: #2c3e50;
+   margin-bottom: 5px;
 }
 
-.watch-video .video-container .tutor span{
-   font-size: 1.5rem;
-   color: var(--light-color);
+.watch-video .video-container .tutor span {
+   color: #666;
+   font-size: 14px;
 }
 
-.watch-video .video-container .flex{
+.watch-video .video-container .description {
+   color: #666;
+   line-height: 1.6;
+   margin-bottom: 15px;
+}
+
+.watch-video .video-container .flex {
    display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 1.5rem;
+   gap: 15px;
+   margin-bottom: 15px;
 }
 
-.watch-video .video-container .flex button{
-   border-radius: .5rem;
-   padding: 1rem 1.5rem;
-   font-size: 1.8rem;
+.watch-video .video-container .flex .inline-btn {
+   padding: 10px 20px;
+   background: #3498db;
+   color: #fff;
+   border-radius: 5px;
+   text-decoration: none;
+   transition: background 0.3s;
+}
+
+.watch-video .video-container .flex .inline-btn:hover {
+   background: #2980b9;
+}
+
+.watch-video .video-container .flex button {
+   padding: 10px 20px;
+   background: #fff;
+   color: #3498db;
+   border: 1px solid #3498db;
+   border-radius: 5px;
    cursor: pointer;
-   background-color: var(--light-bg);
+   transition: all 0.3s;
 }
 
-.watch-video .video-container .flex button i{
-   margin-right: 1rem;
-   color: var(--black);
-}
-
-.watch-video .video-container .flex button span{
-   color: var(--light-color);
-}
-
-.watch-video .video-container .flex button:hover{
-   background-color: var(--black);
-}
-
-.watch-video .video-container .flex button:hover i{
-   color: var(--white);
-}
-
-.watch-video .video-container .flex button:hover span{
-   color: var(--white);
-}
-
-.watch-video .video-container .description{
-   line-height: 1.5;
-   font-size: 1.7rem;
-   color: var(--light-color);
-   margin-top: 2rem;
+.watch-video .video-container .flex button:hover {
+   background: #3498db;
+   color: #fff;
 }
 
 .video-comment-container {
